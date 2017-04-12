@@ -26,8 +26,8 @@ Also you can setup the root password and add a user with acces to the created da
 The default configuration for the database is as follows:
 - hostname: db
 - root password: root
-- user: dbuser
-- password: dbpass
+- user: db
+- password: db
 - database: db
 
 # Ports

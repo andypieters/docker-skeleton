@@ -4,6 +4,7 @@ services:
     build: .
     volumes:
       - ./src:/var/www/html
+      - ./log:/var/www/log
     ports:
       - 8080:80
     depends_on:
@@ -16,8 +17,8 @@ services:
       - 33061:3306
     environment:
      MYSQL_ROOT_PASSWORD: root
-     MYSQL_USER: dbuser
-     MYSQL_PASSWORD: dbpass
+     MYSQL_USER: db
+     MYSQL_PASSWORD: db
      MYSQL_DATABASE: db
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
