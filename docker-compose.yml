@@ -4,7 +4,7 @@ services:
     build: ./services/httpd
     volumes: 
       - ./webroot:/webroot
-      - ./logs/apache:/log
+      - ./logs:/log
     ports: 
       - 8080:80
     depends_on:
@@ -13,7 +13,6 @@ services:
     build: ./services/php
     volumes: 
       - ./webroot:/webroot
-      - ./logs/php:/logs
   db:
     image: mysql
     volumes:
