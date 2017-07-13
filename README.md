@@ -14,13 +14,21 @@ In this way you can easily test your projects without accidentally sending email
 # Usage
 1. Download or checkout this repository.
 2. Open a terminal and navigate to the skeleton.
-3. run `docker-compose up`
+3. run `docker-compose up --build`
 4. After docker completed downloading all images, the services will run
+5. Copy your project files to the webroot directory
 
 # Configuration
-See docker-compose.yml
-You can edit the mysql database that will be created on first start.
-Also you can setup the root password and add a user with acces to the created database.
+## Database
+The database settings can be changed in docker-compose.yml
+## PHP
+You can change the php configuration in the services/php/config/ folder.
+Any .ini files you put here, will be loaded in php.
+After changing any of the ini files, you'll need to rebuild. `docker-compose up --build`
+## Apache
+You can change the configuration of apache in services/httpd/config/httpd.conf
+After changing the file, you'll need to rebuild. `docker-compose up --build`
+
 
 # Default configuration
 The default configuration for the database is as follows:
