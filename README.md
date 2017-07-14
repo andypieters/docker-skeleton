@@ -34,8 +34,8 @@ After changing the file, you'll need to rebuild. `docker-compose up --build`
 The default configuration for the database is as follows:
 - hostname: db
 - root password: root
-- user: dbuser
-- password: dbpass
+- user: db
+- password: db
 - database: db
 
 # Ports
