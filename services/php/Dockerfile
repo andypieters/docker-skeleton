@@ -11,11 +11,14 @@ RUN apt-get update \
         libpng12-dev \
         libxml2-dev \
         libssl-dev \
+        libxslt-dev \
+        libicu-dev \
         ssmtp \
-	wget
+        git \
+	    wget
 
 RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ && \
-    docker-php-ext-install -j$(nproc) iconv mcrypt  gd zip soap pdo pdo_mysql mysqli ftp
+    docker-php-ext-install -j$(nproc) iconv mcrypt  gd zip soap pdo pdo_mysql mysqli ftp xsl intl
 
 #xdebug installeren
 RUN pecl install xdebug \
