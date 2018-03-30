@@ -7,7 +7,7 @@ This skeleton also links a phpmyadmin to the database so you can manage what is 
 Also, no emails will be sent from this container, but catched by mailcatcher.
 In this way you can easily test your projects without accidentally sending emails to your customers.
 
-# Prerequisites 
+# Prerequisites
 - 64 bit operating system
 - Docker (https://www.docker.com/products/docker)
 
@@ -16,18 +16,15 @@ In this way you can easily test your projects without accidentally sending email
 2. Open a terminal and navigate to the skeleton.
 3. run `docker-compose up --build`
 4. After docker completed downloading all images, the services will run
-5. Copy your project files to the webroot directory
+5. Copy your project files to the webroot directory, the /webroot/public folder will be exposed
 
 # Configuration
 ## Database
 The database settings can be changed in docker-compose.yml
-## PHP
-You can change the php configuration in the services/php/config/ folder.
+## Webserver (php-apache)
+You can change the php configuration in the services/php-apache/config/ folder.
 Any .ini files you put here, will be loaded in php.
 After changing any of the ini files, you'll need to rebuild. `docker-compose up --build`
-## Apache
-You can change the configuration of apache in services/httpd/config/httpd.conf
-After changing the file, you'll need to rebuild. `docker-compose up --build`
 
 
 # Default configuration
@@ -47,5 +44,4 @@ http://localhost:8080 for the webserver
 1. The webserver (port: 8080)
 2. Phpmyadmin (port: 8181)
 3. Mailcatcher (port: 1080)
-
 

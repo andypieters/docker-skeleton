@@ -1,22 +1,15 @@
-version: '2'
+version: '3'
 services:
   web:
-    build: ./services/httpd
-    volumes: 
-      - ./webroot:/webroot
-      - ./logs:/log
-    ports: 
-      - 8080:80
-    depends_on:
-      - php
-  php:
-    build: ./services/php
-    volumes: 
-      - ./webroot:/webroot
-  db:
-    image: mysql
+    build: ./services/php-apache
     volumes:
-      - ./db/data:/var/lib/mysql
+      - ./webroot:/webroot
+    ports:
+      - 8080:80
+  db:
+    image: mariadb
+    volumes:
+      - ./db:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_USER: db
