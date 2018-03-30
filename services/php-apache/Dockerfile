@@ -7,6 +7,7 @@ RUN apt-get update \
         libjpeg62-turbo-dev \
         libicu-dev \
         wget \
+        git \
         ssmtp
 
 # configure php
