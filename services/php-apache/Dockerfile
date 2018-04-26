@@ -44,3 +44,6 @@ WORKDIR /webroot
 RUN rm /var/www/html -r && \
     ln -s /webroot/public /var/www/html
 
+ARG USER_ID
+RUN usermod -u $USER_ID www-data
+RUN a2enmod rewrite

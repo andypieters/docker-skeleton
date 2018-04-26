@@ -1,15 +1,18 @@
 version: '3'
 services:
   web:
-    build: ./services/php-apache
+    build: 
+      context: ./services/php-apache
+      args:
+        - USER_ID=501 # use the command "id" to determine your current userId
     volumes:
-      - ./webroot:/webroot
+      - ./webroot:/webroot:cached
     ports:
       - 8080:80
   db:
     image: mariadb
     volumes:
-      - ./db:/var/lib/mysql
+      - ./db:/var/lib/mysql:cached
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_USER: db
