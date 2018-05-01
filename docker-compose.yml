@@ -4,7 +4,7 @@ services:
     build: 
       context: ./services/php-apache
       args:
-        - USER_ID=501 # use the command "id" to determine your current userId
+        - USER_ID=1000 # use the command "id" to determine your current userId
     volumes:
       - ./webroot:/webroot:cached
     ports:
