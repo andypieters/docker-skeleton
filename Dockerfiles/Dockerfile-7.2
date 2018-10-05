@@ -1,0 +1,43 @@
+FROM php:7.2-apache
+
+# enable xdebug
+RUN pecl install xdebug \
+    && docker-php-ext-enable xdebug
+
+# install composer
+COPY --from=composer:1.7 /usr/bin/composer /usr/bin/composer
+
+ENV BUILD_PACKAGES \
+        libfreetype6-dev \
+        libjpeg62-turbo-dev \
+        libicu-dev
+
+# install dependencies
+RUN apt-get update \
+    && apt-get install --no-install-recommends -y \
+        ${BUILD_PACKAGES} \
+        zip \
+        ssmtp 
+
+# configure php
+RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ && \
+    docker-php-ext-install -j$(nproc) gd pdo pdo_mysql mysqli zip opcache intl
+#remove build packaged
+RUN apt-get remove --purge -y ${BUILD_PACKAGES}  && rm -rf /var/lib/apt/lists/*
+
+# add ssmtp mailcatcher config
+RUN echo "FromLineOverride=YES" >> /etc/ssmtp/ssmtp.conf && \
+    echo "mailhub=mailcatcher:1025" >>  /etc/ssmtp/ssmtp.conf
+
+# copy php config files
+COPY config/php/*.ini $PHP_INI_DIR/conf.d/
+
+# create webroot folder
+RUN mkdir /webroot
+VOLUME /webroot
+WORKDIR /webroot
+
+ENV APACHE_DOCUMENT_ROOT /webroot
+
+RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
+RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
