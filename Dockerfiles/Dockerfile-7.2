@@ -10,7 +10,10 @@ COPY --from=composer:1.7 /usr/bin/composer /usr/bin/composer
 ENV BUILD_PACKAGES \
         libfreetype6-dev \
         libjpeg62-turbo-dev \
-        libicu-dev
+        libicu-dev \
+        libxslt-dev \
+        libxml2-dev \
+        libmcrypt-dev
 
 # install dependencies
 RUN apt-get update \
@@ -21,8 +24,9 @@ RUN apt-get update \
 
 # configure php
 RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ && \
-    docker-php-ext-install -j$(nproc) gd pdo pdo_mysql mysqli zip opcache intl
-#remove build packaged
+    docker-php-ext-install -j$(nproc) gd pdo pdo_mysql mysqli zip opcache intl mcrypt xsl soap bcmath
+    
+#remove build packages
 RUN apt-get remove --purge -y ${BUILD_PACKAGES}  && rm -rf /var/lib/apt/lists/*
 
 # add ssmtp mailcatcher config
