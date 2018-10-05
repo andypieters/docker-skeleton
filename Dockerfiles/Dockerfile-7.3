@@ -17,7 +17,7 @@ ENV BUILD_PACKAGES \
 RUN apt-get update \
     && apt-get install --no-install-recommends -y \
         ${BUILD_PACKAGES} \
-        zip \
+        unzip \
         ssmtp 
 
 # configure php
