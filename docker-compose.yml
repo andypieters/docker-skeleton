@@ -2,13 +2,15 @@ version: '3'
 services:
   web:
     build: 
-      context: ./services/php-apache
+      context: ./build
       args:
-        - USER_ID=1000 # use the command "id" to determine your current userId
+        - USER_ID=1000
     volumes:
       - ./webroot:/webroot:cached
     ports:
       - 8080:80
+    depends_on: 
+      - db
   db:
     image: mariadb
     volumes:
@@ -22,6 +24,8 @@ services:
     image: phpmyadmin/phpmyadmin
     ports:
       - 8181:80
+    depends_on: 
+      - db
   mailcatcher:
     image: schickling/mailcatcher
     ports:
