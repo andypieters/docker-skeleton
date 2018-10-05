@@ -1,7 +1,7 @@
 FROM php:7.3-rc-apache
 
 # enable xdebug
-RUN pecl install xdebug \
+RUN pecl install xdebug-2.7.0beta1 \
     && docker-php-ext-enable xdebug
 
 # install composer
@@ -10,7 +10,8 @@ COPY --from=composer:1.7 /usr/bin/composer /usr/bin/composer
 ENV BUILD_PACKAGES \
         libfreetype6-dev \
         libjpeg62-turbo-dev \
-        libicu-dev
+        libicu-dev \
+        libzip-dev
 
 # install dependencies
 RUN apt-get update \
