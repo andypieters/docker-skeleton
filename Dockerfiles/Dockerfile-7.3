@@ -42,6 +42,8 @@ RUN mkdir /webroot
 VOLUME /webroot
 WORKDIR /webroot
 
-RUN ln -s /webroot /var/www/html
+RUN rm -rf /var/www/html && \
+    ln -s /webroot /var/www/html && \
+    chown -R www-data /var/www
 
 RUN a2enmod rewrite
