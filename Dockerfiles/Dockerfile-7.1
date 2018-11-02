@@ -20,7 +20,8 @@ RUN apt-get update \
     && apt-get install --no-install-recommends -y \
         ${BUILD_PACKAGES} \
         unzip \
-        ssmtp 
+        ssmtp \
+        git
 
 # configure php
 RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ && \
