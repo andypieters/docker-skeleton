@@ -7,6 +7,7 @@ services:
         - USER_ID=1000
     volumes:
       - ./webroot:/webroot:cached
+      - ~/.composer-docker:/var/www/.composer
     ports:
       - 8080:80
     depends_on: 
@@ -14,7 +15,7 @@ services:
   db:
     image: mariadb
     volumes:
-      - ./db:/var/lib/mysql:cached
+      - db-data:/var/lib/mysql:cached
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_USER: db
@@ -30,3 +31,5 @@ services:
     image: schickling/mailcatcher
     ports:
       - 1080:1080
+volumes:
+  db-data:
