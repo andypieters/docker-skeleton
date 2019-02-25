@@ -1,4 +1,5 @@
-FROM andypieters/php-apache:7.2
+ARG PHP_VERSION=7.2
+FROM andypieters/php-apache:${PHP_VERSION}
 
 
 COPY php.ini $PHP_INI_DIR/conf.d/zz-php.ini

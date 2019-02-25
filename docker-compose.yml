@@ -5,6 +5,7 @@ services:
       context: ./build
       args:
         - USER_ID=1000
+        - PHP_VERSION=7.2
     volumes:
       - ./webroot:/webroot:cached
       - ~/.composer-docker:/var/www/.composer
