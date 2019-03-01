@@ -1,32 +1,49 @@
 version: '3'
 services:
   web:
+    container_name: "dbg_web"
     build: 
       context: ./build
       args:
         - USER_ID=1000
     volumes:
-      - ./webroot:/webroot:cached
+      - ./data/webroot:/webroot
     ports:
       - 8080:80
+      - 8443:443
     depends_on: 
-      - db
-  db:
+      - mariadb
+      - mongodb
+  mongodb:
+    image: mongo:latest
+    container_name: "dbg_mongodb"
+    environment:
+      - MONGO_DATA_DIR=/data/mongodb
+      - MONGO_LOG_DIR=/dev/null
+    volumes:
+      - ./data/mongodb:/data/mongodb
+    ports:
+        - 27018:27017
+    command: mongod --smallfiles --logpath=/dev/null # --quiet
+  mariadb:
+    container_name: "dbg_mariadb"
     image: mariadb
     volumes:
-      - ./db:/var/lib/mysql:cached
+      - ./data/db:/var/lib/mysql:cached
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_USER: db
       MYSQL_PASSWORD: db
       MYSQL_DATABASE: db
   phpmyadmin:
+    container_name: "dbg_phpmyadmin"
     image: phpmyadmin/phpmyadmin
     ports:
       - 8181:80
     depends_on: 
-      - db
+      - mariadb
   mailcatcher:
+    container_name: "dbg_mailcatcher"
     image: schickling/mailcatcher
     ports:
       - 1080:1080
