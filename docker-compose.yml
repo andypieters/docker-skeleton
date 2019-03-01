@@ -6,6 +6,7 @@ services:
       args:
         - USER_ID=1000
         - PHP_VERSION=7.2
+        - WEBROOT=/webroot
     volumes:
       - ./webroot:/webroot:cached
       - ~/.composer-docker:/var/www/.composer

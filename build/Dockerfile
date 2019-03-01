@@ -8,5 +8,6 @@ ARG USER_ID
 RUN usermod -u $USER_ID www-data
 
 WORKDIR /webroot
-RUN rm -rf /var/www/html && ln -s /webroot /var/www/html
+ARG WEBROOT=/webroot
+RUN rm -rf /var/www/html && ln -s ${WEBROOT} /var/www/html
 VOLUME /var/www/.composer
