@@ -1,4 +1,6 @@
-FROM andypieters/php-apache:7.2
+FROM webdevops/php-apache:7.2
+ENV WEB_DOCUMENT_ROOT=/project/web/
+ENV WEB_DOCUMENT_INDEX index.php
 
 
 COPY php.ini $PHP_INI_DIR/conf.d/zz-php.ini

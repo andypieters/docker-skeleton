@@ -5,9 +5,9 @@ services:
     build: 
       context: ./build
       args:
-        - USER_ID=1000
+        - USER_ID=10000
     volumes:
-      - ./data/webroot:/webroot
+      - ./data/project:/project:cached
     ports:
       - 8080:80
       - 8443:443
