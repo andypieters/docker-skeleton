@@ -7,10 +7,10 @@ services:
       args:
         - USER_ID=10000
     volumes:
-      - ./data/project:/project:cached
+      - ./data/databrydge_aws:/project:cached
     ports:
-      - 8080:80
-      - 8443:443
+      - 80:80
+      - 443:443
     depends_on: 
       - mariadb
       - mongodb
@@ -23,13 +23,15 @@ services:
     volumes:
       - ./data/mongodb:/data/mongodb
     ports:
-        - 27018:27017
+      - 27017:27017
     command: mongod --smallfiles --logpath=/dev/null # --quiet
   mariadb:
     container_name: "dbg_mariadb"
     image: mariadb
     volumes:
       - ./data/db:/var/lib/mysql:cached
+    ports:
+      - 3306:3306
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_USER: db
@@ -39,7 +41,7 @@ services:
     container_name: "dbg_phpmyadmin"
     image: phpmyadmin/phpmyadmin
     ports:
-      - 8181:80
+      - 8180:80
     depends_on: 
       - mariadb
   mailcatcher:

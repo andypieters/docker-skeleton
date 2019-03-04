@@ -18,7 +18,8 @@ In this way you can easily test your projects without accidentally sending email
 4. After docker completed downloading all images, the services will run
 5. Copy your project files to the project directory, the /project/web folder will be exposed
 6. If you want to run commands in the app container use command `docker exec dbg_web composer install  <command>` eg. `docker exec dbg_web composer install`
-7. to connect to mysql use as ip address `mariadb`, for mongodb use `mongodb`
+7. If you want to keep a terminal open within the docker container use command `docker exec -i -t dbg-web bash`
+8. to connect to mysql use as ip address `mariadb`, for mongodb use `mongodb`
 
 # Configuration
 ## Database
