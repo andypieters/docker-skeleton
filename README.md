@@ -14,12 +14,13 @@ In this way you can easily test your projects without accidentally sending email
 # Usage
 1. Download or checkout this repository.
 2. Open a terminal and navigate to the skeleton.
-3. run `docker-compose up --build`
+3. run `docker-compose up --build` or `docker-compose up -r` to run in background after first build
 4. After docker completed downloading all images, the services will run
-5. Copy your project files to the project directory, the /project/web folder will be exposed
-6. If you want to run commands in the app container use command `docker exec dbg_web composer install  <command>` eg. `docker exec dbg_web composer install`
-7. If you want to keep a terminal open within the docker container use command `docker exec -i -t dbg-web bash`
-8. to connect to mysql use as ip address `mariadb`, for mongodb use `mongodb`
+5. Download databrydge_aws in the data directory.
+6. If you want to run commands in the app container use command `
+` to open a terminal open within the docker container. Then `cd project` to switch to the working project folder. From there run commands as if on a local environment.
+7. To connect to mysql within the application use as ip address `mariadb`, for mongodb use `mongodb`
+8. To connect to mysql / mongodb from outside the docker application use `localhost` / `127.0.0.1` 
 
 # Configuration
 ## Database
