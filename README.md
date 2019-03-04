@@ -43,9 +43,9 @@ The default configuration for the database is as follows:
 Docker compose will start the following services
 You can access these services from a browser.
 For example:
-http://localhost:8080 for the webserver
+http://localhost:80 for the webserver
 
-1. The webserver (port: 8080)
+1. The webserver (port: 80)
 2. Phpmyadmin (port: 8181)
 3. Mailcatcher (port: 1080)
 
